@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: req-nlp-web
+  labels:
+    app: req-nlp-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: req-nlp-web
+  template:
+    metadata:
+      labels:
+        app: req-nlp-web
+    spec:
+      containers:
+      - name: req-nlp-web
+        image: gabiperez/req-nlp-app:latest   # Cambia esto
+        command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+        ports:
+          - containerPort: 8000
+        env:
+          - name: MYSQL_HOST
+            value: "mariadb"
+          - name: MYSQL_DATABASE
+            value: "req_DB"
+          - name: MYSQL_USER
+            value: "user"
+          - name: MYSQL_PASSWORD
+            value: "rqadmin"
+          - name: MYSQL_PORT
+            value: "3306"
+          - name: INVERTIR_TEXTO_API_URL
+            value: "https://invertir-texto-api-req-nlp.okd.lifia.info.unlp.edu.ar"  # Cambia esto si es necesario
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: req-nlp-web-service
+spec:
+  selector:
+    app: req-nlp-web
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP
