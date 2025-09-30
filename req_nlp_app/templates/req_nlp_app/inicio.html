@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="{% static 'req_nlp_app/css/styles.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script>
-        const INVERTIR_TEXTO_API_URL = "{{ INVERTIR_TEXTO_API_URL }}";
+        const API_INVERTIR_TEXTO_URL = "{{API_INVERTIR_TEXTO_URL}}";
+        const API_VOZ_PASIVA_URL = "{{API_VOZ_PASIVA_URL}}";
+        const API_WORD_REPETITION_URL = "{{API_WORD_REPETITION_URL}}";
     </script>
     
 </head>
@@ -73,7 +75,8 @@
             <h2>Opciones</h2>
             <form>
                 <label><input type="checkbox" id="invertir-texto" name="invertir"> Invertir texto</label><br>
-                <label><input type="checkbox" name="dos"> Dos</label><br>
+                <label><input type="checkbox" id="voz-pasiva" name="voz-pasiva">Voz pasiva a voz activa</label><br>
+                <label><input type="checkbox" id="word-repetition" name="word-repetition">Repetición de palabras</label><br>
                 <label><input type="checkbox" name="tres"> Tres</label><br>
                  <button type="button" onclick="mostrarResultado()">OK</button>
             </form>
