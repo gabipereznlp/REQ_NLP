@@ -11,7 +11,10 @@ def entorno_variable(request):
         'API_UNUSUAL_PUNCTUATION_URL': os.environ.get('API_UNUSUAL_PUNCTUATION_URL', ''),
         'API_ABSTRACT_WORDS_URL': os.environ.get('API_ABSTRACT_WORDS_URL', ''), 
         'API_LOGICAL_CONNECTORS_URL': os.environ.get('API_LOGICAL_CONNECTORS_URL', ''), 
-        'API_READABILITY_METRIC_URL': os.environ.get('API_READABILITY_METRIC_URL', '')
+        'API_READABILITY_METRIC_URL': os.environ.get('API_READABILITY_METRIC_URL', ''),
+        'API_TENSES_URL': os.environ.get('API_TENSES_URL', ''), 
+        'API_CLICHES_URL': os.environ.get('API_CLICHES_URL', '')
+        
 
 
 

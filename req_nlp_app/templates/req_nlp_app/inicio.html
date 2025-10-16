@@ -21,7 +21,8 @@
         const API_ABSTRACT_WORDS_URL = "{{API_ABSTRACT_WORDS_URL}}";
         const API_LOGICAL_CONNECTORS_URL = "{{API_LOGICAL_CONNECTORS_URL}}";
         const API_READABILITY_METRIC_URL = "{{API_READABILITY_METRIC_URL}}";
-
+        const API_TENSES_URL = "{{API_TENSES_URL}}";
+        const API_CLICHES_URL = "{{API_CLICHES_URL}}";
         
     </script>
     
@@ -123,6 +124,14 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="readability-metric" name="readability-metric">
                     <label class="form-check-label">Establecer métrica de legibilidad</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="tenses" name="tenses">
+                    <label class="form-check-label">Detectar tiempos verbales</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="cliches" name="cliches">
+                    <label class="form-check-label">Detectar cliches</label>
                 </div>
 
                  <button type="button" onclick="mostrarResultado()">OK</button>

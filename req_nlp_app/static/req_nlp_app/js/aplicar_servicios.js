@@ -12,6 +12,8 @@ async function mostrarResultado() {
     const abstract_words = document.getElementById("abstract-words").checked;
     const logical_connectors = document.getElementById("logical-connectors").checked;
     const readability_metric = document.getElementById("readability-metric").checked;
+    const tenses = document.getElementById("tenses").checked;
+    const cliches = document.getElementById("cliches").checked;
 
 
     const resultados = [];
@@ -188,6 +190,42 @@ async function mostrarResultado() {
         
         promesas.push(p);
     }
+    if (tenses){
+        const p = fetch(`${API_TENSES_URL}/deteccion_de_verbos/?texto=${encodeURIComponent(texto)}`)
+        .then(response => response.json())
+        .then(data => {
+            if (Array.isArray(data) && data.length > 0) {
+                const resultadosTiempos = data.map(([verbo, tiempo]) => `${verbo}: ${tiempo}`).join("; ");
+                resultados.push(`Tiempos verbales detectados -> ${resultadosTiempos}`);
+            } else {
+                resultados.push("No se detectaron tiempos verbales.");
+            }
+        })
+        .catch(err => resultados.push("Error al detectar tiempos verbales: " + err));
+        
+        promesas.push(p);
+    }
+
+    if (cliches) {
+        const p = fetch(`${API_CLICHES_URL}/detectar_cliches/`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ texto: texto })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (Array.isArray(data.cliches_encontrados) && data.cliches_encontrados.length > 0) {
+                resultados.push("Clichés detectados: " + data.cliches_encontrados.join(", "));
+            } else {
+                resultados.push("No se detectaron clichés en el texto.");
+            }
+        })
+        .catch(err => resultados.push("Error al detectar clichés: " + err));
+
+        promesas.push(p);
+    }
+
+
     if (promesas.length === 0) {
         resultados.push("No se seleccionó ninguna opción.");
     }
